@@ -405,15 +405,16 @@ var CLASSES=[
  ['CFA1H02.51',1,'LO','ALL','2026-12-09'],['CFA103.59',1,'F2F','HCM','2026-12-14'],
  ['CFA105.14',1,'F2F','HN','2026-12-21'],['CFA1H05.14',1,'LO','ALL','2026-12-21'],
  ['CFA118.0127',1,'RO','ALL','2027-01-05'],['CFA211.0127',2,'RO','ALL','2027-01-05'],
- ['CFA302.0127',3,'RO','ALL','2027-01-05'],['CFA105.15',1,'F2F','HN','2027-01-11'],
- ['CFA1H05.15',1,'LO','ALL','2027-01-11'],['CFA203.17',2,'F2F','HCM','2027-01-14'],
- ['CFA2H03.17',2,'LO','ALL','2027-01-14'],['CFA303.06',3,'F2F','HCM','2027-01-15'],
- ['CFA3H03.06',3,'LO','ALL','2027-01-15'],['CFA202.17',2,'F2F','HN','2027-01-19'],
- ['CFA2H02.17',2,'LO','ALL','2027-01-19'],['CFA103.61',1,'F2F','HCM','2027-01-19'],
- ['CFA302.06',3,'F2F','HN','2027-01-20'],['CFA3H02.06',3,'LO','ALL','2027-01-20'],
- ['CFA205.04',2,'F2F','HN','2027-02-22'],['CFA102.54',1,'F2F','HN','2027-03-01'],
- ['CFA1H02.54',1,'LO','ALL','2027-03-01'],['CFA103.62',1,'F2F','HCM','2027-03-10'],
- ['CFA105.16',1,'F2F','HN','2027-03-16'],['CFA1H05.16',1,'LO','ALL','2027-03-16']
+ ['CFA302.0127',3,'RO','ALL','2027-01-05'],['CFA303.06',3,'F2F','HCM','2027-01-05'],
+ ['CFA3H03.06',3,'LO','ALL','2027-01-05'],['CFA302.06',3,'F2F','HN','2027-01-06'],
+ ['CFA3H02.06',3,'LO','ALL','2027-01-06'],['CFA105.15',1,'F2F','HN','2027-01-13'],
+ ['CFA1H05.15',1,'LO','ALL','2027-01-13'],['CFA203.17',2,'F2F','HCM','2027-01-13'],
+ ['CFA2H03.17',2,'LO','ALL','2027-01-13'],['CFA202.17',2,'F2F','HN','2027-01-18'],
+ ['CFA2H02.17',2,'LO','ALL','2027-01-18'],['CFA103.61',1,'F2F','HCM','2027-01-19'],
+ ['CFA205.04',2,'F2F','HN','2027-02-18'],['CFA102.53',1,'F2F','HN','2027-03-01'],
+ ['CFA1H02.53',1,'LO','ALL','2027-03-01'],['CFA105.16',1,'F2F','HN','2027-03-02'],
+ ['CFA1H05.16',1,'LO','ALL','2027-03-02'],['CFA103.62',1,'F2F','HCM','2027-03-04'],
+ ['CFA1H03.62',1,'LO','ALL','2027-03-04']
 ].map(function(r){return {code:r[0],level:r[1],form:r[2],region:r[3],kg:D(r[4])};});
 
 /* ===== Tiện ích ===== */
@@ -616,7 +617,7 @@ function renderCmp(cd){
   var rows=cmpRows(cd);
   return '<div class="cmp" style="--n:'+cd.length+'">'+cd.map(function(c){
     return '<div class="cd'+(c.sel?' sel':'')+'"><div class="hd"><b>'+c.n+' Level</b><small>'+(c.n>1?'Level '+c.lo+'–'+c.hi:'Level '+c.lo)+'</small>'+(c.sel?'<span class="tag internal">Đang chọn</span>':'')+'</div>'
-      +'<div class="pr">'+(c.saved>0?'<s class="num">'+fmt(c.base)+'</s>':'')+'<b class="num">'+fmt(c.final)+'</b>'+(c.saved>0?'<em class="num">Giảm '+fmt(c.saved)+' ('+pc(c.base?c.saved/c.base:0)+')</em>':'')+'</div>'
+      +'<div class="pr">'+(c.saved>0?'<s class="num">'+fmt(c.base)+'</s>':'')+'<b class="num">'+fmt(c.final)+'</b>'+(c.saved>0?'<em class="num">Giảm '+fmt(c.saved)+'</em>':'')+'</div>'
       +'<ul>'+rows.map(function(x){return '<li'+(c.items[x]?'':' class="no"')+'><i>'+(c.items[x]?'✓':'–')+'</i><span>'+esc(x)+'</span></li>';}).join('')+'</ul></div>';
   }).join('')+'</div>';
 }
@@ -690,7 +691,7 @@ function quoteText(r){
   var cmpT=S.cmp&&r.cls&&(4-r.cls.level)>=2;
   if(cmpT){
     var cd=compareData(), rw=cmpRows(cd);
-    cd.forEach(function(c){ L.push('','GÓI '+c.n+' LEVEL ('+(c.n>1?'Level '+c.lo+'–'+c.hi:'Level '+c.lo)+'): '+fmt(c.final),'Học phí gốc '+fmt(c.base)+' – giảm '+fmt(c.saved)+' ('+pc(c.base?c.saved/c.base:0)+')'); rw.forEach(function(x){ if(c.items[x]) L.push('✓ '+x); }); });
+    cd.forEach(function(c){ L.push('','GÓI '+c.n+' LEVEL ('+(c.n>1?'Level '+c.lo+'–'+c.hi:'Level '+c.lo)+'): '+fmt(c.final),'Học phí gốc '+fmt(c.base)+' – giảm '+fmt(c.saved)); rw.forEach(function(x){ if(c.items[x]) L.push('✓ '+x); }); });
     L.push('');
     if(r.valid) L.push('⏰ BÁO GIÁ CÓ HIỆU LỰC ĐẾN HẾT NGÀY '+dmy(r.valid)+'.');
     L.push('','Tư vấn viên: '+t[0]+' – '+t[1]+' – '+t[2],'Hotline '+BANK.hotline+' · '+BANK.web);
